@@ -1,0 +1,31 @@
+
+CREATE DATABASE [ISSD-TP4-202501];
+GO
+USE [ISSD-TP4-202501];
+GO
+
+CREATE TABLE Proveedores (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    RazonSocial VARCHAR(150) NOT NULL,
+    Cuit VARCHAR(11) NOT NULL
+);
+
+CREATE TABLE Moneda (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Detalle VARCHAR(100) NOT NULL,
+    FechaCotizacion DATE NOT NULL,
+    Cotizacion DECIMAL(4,2) NOT NULL
+);
+
+CREATE TABLE Compras (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Fecha DATE NOT NULL,
+    MontoGravado DECIMAL(15,2) NOT NULL,
+    IVA DECIMAL(14,2) NOT NULL,
+    NumeroFactura INT NOT NULL,
+    PuntoVenta INT NOT NULL,
+    IdProveedor INT NOT NULL,
+    IdMoneda INT NOT NULL,
+    FOREIGN KEY (IdProveedor) REFERENCES Proveedores(Id),
+    FOREIGN KEY (IdMoneda) REFERENCES Moneda(Id)
+);
